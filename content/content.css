@@ -78,7 +78,7 @@ body.fn-nuked ytd-masthead #center {
 
 .fn-logo-inject {
     position: absolute !important;
-    left: -86px !important;
+    left: -14px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 36px;
@@ -175,14 +175,31 @@ body.fn-nuked #masthead #end #buttons>*:not(.fn-profile-btn) {
 }
 
 body.fn-nuked .fn-profile-btn {
-    display: inline-block !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     position: absolute !important;
-    left: -44px !important;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    left: 18px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     margin: 0 !important;
     z-index: 3000 !important;
     pointer-events: auto !important;
+}
+
+body.fn-nuked.fn-accent .fn-profile-btn yt-interaction,
+body.fn-nuked.fn-accent .fn-profile-btn .yt-spec-button-shape-next--overlay {
+    background-color: transparent !important;
+    display: none !important;
+}
+
+body.fn-nuked.fn-accent .fn-profile-btn:hover {
+    background-color: rgba(77, 208, 225, 0.15) !important;
+    cursor: pointer;
 }
 
 .fn-injected-nav {
