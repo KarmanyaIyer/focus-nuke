@@ -1,17 +1,19 @@
-// content.js - Applies states and restructures YouTube UI
+// init
 
 let state = {
     nukeActive: false,
     oledMode: false,
     accentMode: false,
-    notesEnabled: true
+    notesEnabled: true,
+    superNukeMode: false
 };
 
-chrome.storage.local.get(['nukeActive', 'oledMode', 'accentMode', 'notesEnabled'], (result) => {
+chrome.storage.local.get(['nukeActive', 'oledMode', 'accentMode', 'notesEnabled', 'superNukeMode'], (result) => {
     if (result.nukeActive !== undefined) state.nukeActive = result.nukeActive;
     if (result.oledMode !== undefined) state.oledMode = result.oledMode;
     if (result.accentMode !== undefined) state.accentMode = result.accentMode;
     if (result.notesEnabled !== undefined) state.notesEnabled = result.notesEnabled;
+    if (result.superNukeMode !== undefined) state.superNukeMode = result.superNukeMode;
 
     applyStateClasses();
     if (state.nukeActive) {
@@ -27,6 +29,9 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
         if (changes.notesEnabled) {
             state.notesEnabled = changes.notesEnabled.newValue;
             setupFocusNotes();
+        }
+        if (changes.superNukeMode) {
+            state.superNukeMode = changes.superNukeMode.newValue;
         }
 
         applyStateClasses();
@@ -50,6 +55,9 @@ function applyStateClasses() {
 
     if (state.accentMode) body.classList.add('fn-accent');
     else body.classList.remove('fn-accent');
+
+    if (state.superNukeMode) body.classList.add('fn-super-nuke');
+    else body.classList.remove('fn-super-nuke');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -125,20 +133,17 @@ function restructureUI() {
                 if (!center || !end) return false;
 
                 let foundAny = false;
-                // Grab profile buttons strictly from the #end container where YouTube natively spawns them for the top bar
                 const avatarBtns = end.querySelectorAll('yt-img-shadow#avatar, #avatar-btn');
 
                 avatarBtns.forEach(btn => {
                     const container = btn.closest('ytd-topbar-menu-button-renderer') || btn;
                     if (container && !center.contains(container)) {
-                        // This is an untagged/newly generated top-bar profile button in #end, move it to #center
                         container.classList.add('fn-profile-btn');
                         center.appendChild(container);
                         foundAny = true;
                     }
                 });
 
-                // Clean up orphaned profile buttons so only the latest active one remains
                 const profileBtns = center.querySelectorAll('.fn-profile-btn');
                 if (profileBtns.length > 1) {
                     for (let i = 0; i < profileBtns.length - 1; i++) {
@@ -150,7 +155,6 @@ function restructureUI() {
 
             sweepProfileBtns();
 
-            // Permanently monitor #masthead to instantly catch asynchronous profile re-injections during SPA nav
             if (!window.fnMastheadObserver) {
                 const mastheadContainer = document.getElementById('masthead');
                 if (mastheadContainer) {
@@ -199,7 +203,7 @@ function revertUI() {
     if (start) start.style.display = '';
 }
 
-// Focus Notes Module
+// notes
 
 let currentVideoId = null;
 
@@ -265,7 +269,7 @@ function setupFocusNotes() {
     });
 
     const storageKey = `fn_notes_array_${videoId}`;
-    const legacyKey = `fn_note_${videoId}`; // Keep for migration
+    const legacyKey = `fn_note_${videoId}`;
 
     let notesArray = [];
 
@@ -296,7 +300,6 @@ function setupFocusNotes() {
         list.scrollTop = list.scrollHeight;
     }
 
-    // Load existing notes
     chrome.storage.local.get([storageKey, legacyKey], (result) => {
         if (result[storageKey]) {
             notesArray = result[storageKey];

@@ -4,7 +4,8 @@ chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.get({
         nukeActive: false,
         oledMode: true,
-        accentMode: true
+        accentMode: true,
+        superNukeMode: false
     }, (result) => {
         chrome.storage.local.set(result);
     });

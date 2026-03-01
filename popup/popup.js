@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     nukeActive: false,
     oledMode: true,
     accentMode: true,
-    notesEnabled: true
+    notesEnabled: true,
+    superNukeMode: false
   }, (result) => {
     updateNukeUI(result.nukeActive);
     oledToggle.checked = result.oledMode;
@@ -22,6 +23,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       notesToggle.checked = result.notesEnabled;
       notesToggle.addEventListener('change', (e) => {
         chrome.storage.local.set({ notesEnabled: e.target.checked });
+      });
+    }
+
+    const superNukeToggle = document.getElementById('superNukeToggle');
+    if (superNukeToggle) {
+      superNukeToggle.checked = result.superNukeMode;
+      superNukeToggle.addEventListener('change', (e) => {
+        chrome.storage.local.set({ superNukeMode: e.target.checked });
       });
     }
   });

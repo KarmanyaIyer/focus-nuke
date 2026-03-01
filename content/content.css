@@ -115,7 +115,6 @@ body.fn-nuked.fn-accent .fn-profile-btn:hover {
 
 .fn-floating-logo {
     display: none;
-    /* hidden by default */
 }
 
 body.fn-nuked.fn-fullscreen .fn-floating-logo,
@@ -434,9 +433,36 @@ body.fn-nuked.fn-accent .fn-notes-save:hover {
     font-size: 13px;
     line-height: 1.4;
     height: 60px;
-    /* Reduced to fit list */
 }
 
 body.fn-nuked.fn-accent .fn-notes-textarea:focus {
     outline: 1px solid #4dd0e1;
+}
+
+
+body.fn-nuked.fn-super-nuke #below,
+body.fn-nuked.fn-super-nuke ytd-watch-metadata,
+body.fn-nuked.fn-super-nuke #ticket-shelf,
+body.fn-nuked.fn-super-nuke #primary-inner>#info {
+    display: none !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-watch-flexy[flexy] {
+    --ytd-watch-flexy-max-player-width: calc(100vw - 360px) !important;
+    --ytd-watch-flexy-max-player-height: 85vh !important;
+}
+
+body.fn-nuked.fn-super-nuke #secondary,
+body.fn-nuked.fn-super-nuke #secondary-inner {
+    max-width: 320px !important;
+    min-width: 320px !important;
+    width: 320px !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer {
+    max-width: 320px !important;
+}
+
+body.fn-nuked.fn-super-nuke .header.ytd-playlist-panel-renderer {
+    display: none !important;
 }
