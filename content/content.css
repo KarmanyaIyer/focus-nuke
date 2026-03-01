@@ -447,22 +447,55 @@ body.fn-nuked.fn-super-nuke #primary-inner>#info {
     display: none !important;
 }
 
+/* Disable main page scrolling to hide the redundant global scrollbar */
+body.fn-nuked.fn-super-nuke.fn-watch-page,
+html:has(body.fn-nuked.fn-super-nuke.fn-watch-page) {
+    overflow: hidden !important;
+}
+
 body.fn-nuked.fn-super-nuke ytd-watch-flexy[flexy] {
-    --ytd-watch-flexy-max-player-width: calc(100vw - 360px) !important;
+    --ytd-watch-flexy-max-player-width: calc(100vw - 268px) !important;
     --ytd-watch-flexy-max-player-height: 85vh !important;
+}
+
+body.fn-nuked.fn-super-nuke #columns,
+body.fn-nuked.fn-super-nuke #secondary {
+    padding-right: 0 !important;
 }
 
 body.fn-nuked.fn-super-nuke #secondary,
 body.fn-nuked.fn-super-nuke #secondary-inner {
-    max-width: 320px !important;
-    min-width: 320px !important;
-    width: 320px !important;
+    max-width: 260px !important;
+    min-width: 260px !important;
+    width: 260px !important;
 }
 
 body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer {
-    max-width: 320px !important;
+    max-width: 260px !important;
 }
 
 body.fn-nuked.fn-super-nuke .header.ytd-playlist-panel-renderer {
     display: none !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer #items,
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer #contents {
+    scrollbar-width: none !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer #items::-webkit-scrollbar,
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-renderer #contents::-webkit-scrollbar {
+    display: none !important;
+    width: 0px !important;
+    background: transparent !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-video-renderer ytd-menu-renderer {
+    display: none !important;
+}
+
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-video-renderer #video-title,
+body.fn-nuked.fn-super-nuke ytd-playlist-panel-video-renderer #meta {
+    padding-right: 0 !important;
+    margin-right: 0 !important;
 }
