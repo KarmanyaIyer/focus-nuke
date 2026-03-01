@@ -108,41 +108,57 @@ function restructureUI() {
                 logoLink.className = 'fn-logo-inject';
 
                 const logoImg = document.createElement('img');
-                logoImg.src = chrome.runtime.getURL('assets/icon48.png');
-                logoLink.appendChild(logoImg);
+                try {
+                    logoImg.src = chrome.runtime.getURL('assets/icon48.png');
+                    logoLink.appendChild(logoImg);
+                } catch (e) {
+                    console.log('FocusNuke: Extension context invalidated, suppressing injection error.');
+                }
 
                 center.insertBefore(logoLink, center.firstChild);
             }
 
 
-            function tagProfileBtn() {
-                let avatarBtn = document.getElementById('avatar-btn');
-                if (!avatarBtn) {
-                    avatarBtn = document.querySelector('yt-img-shadow#avatar');
-                }
-                const container = avatarBtn?.closest('ytd-topbar-menu-button-renderer') || avatarBtn;
-                if (container) {
-                    if (!container.classList.contains('fn-profile-btn')) {
+            function sweepProfileBtns() {
+                const center = document.getElementById('center');
+                const end = document.getElementById('end');
+                if (!center || !end) return false;
+
+                let foundAny = false;
+                // Grab profile buttons strictly from the #end container where YouTube natively spawns them for the top bar
+                const avatarBtns = end.querySelectorAll('yt-img-shadow#avatar, #avatar-btn');
+
+                avatarBtns.forEach(btn => {
+                    const container = btn.closest('ytd-topbar-menu-button-renderer') || btn;
+                    if (container && !center.contains(container)) {
+                        // This is an untagged/newly generated top-bar profile button in #end, move it to #center
                         container.classList.add('fn-profile-btn');
-                    }
-
-                    const center = document.getElementById('center');
-                    if (center && !center.contains(container)) {
                         center.appendChild(container);
-                    }
-                    return true;
-                }
-                return !!document.querySelector('.fn-profile-btn');
-            }
-
-            if (!tagProfileBtn()) {
-                const observer = new MutationObserver((mutations, obs) => {
-                    if (tagProfileBtn()) {
-                        obs.disconnect();
+                        foundAny = true;
                     }
                 });
-                observer.observe(document.body, { childList: true, subtree: true });
-                setTimeout(() => observer.disconnect(), 10000);
+
+                // Clean up orphaned profile buttons so only the latest active one remains
+                const profileBtns = center.querySelectorAll('.fn-profile-btn');
+                if (profileBtns.length > 1) {
+                    for (let i = 0; i < profileBtns.length - 1; i++) {
+                        profileBtns[i].remove();
+                    }
+                }
+                return foundAny || profileBtns.length > 0;
+            }
+
+            sweepProfileBtns();
+
+            // Permanently monitor #masthead to instantly catch asynchronous profile re-injections during SPA nav
+            if (!window.fnMastheadObserver) {
+                const mastheadContainer = document.getElementById('masthead');
+                if (mastheadContainer) {
+                    window.fnMastheadObserver = new MutationObserver(() => {
+                        sweepProfileBtns();
+                    });
+                    window.fnMastheadObserver.observe(mastheadContainer, { childList: true, subtree: true });
+                }
             }
         }
 

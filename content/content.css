@@ -77,20 +77,40 @@ body.fn-nuked ytd-masthead #center {
 }
 
 .fn-logo-inject {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
     position: absolute !important;
-    left: -14px !important;
+    left: -10px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    width: 36px;
-    height: 36px;
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
     margin: 0 !important;
     flex-shrink: 0;
+
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    transition: all 0.25s ease !important;
 }
 
 .fn-logo-inject img {
-    width: 100%;
-    height: 100%;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
     object-fit: contain;
+}
+
+.fn-logo-inject:hover,
+body.fn-nuked .fn-profile-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    cursor: pointer !important;
+}
+
+body.fn-nuked.fn-accent .fn-logo-inject:hover,
+body.fn-nuked.fn-accent .fn-profile-btn:hover {
+    background-color: rgba(77, 208, 225, 0.15) !important;
 }
 
 .fn-floating-logo {
@@ -183,23 +203,21 @@ body.fn-nuked .fn-profile-btn {
     height: 42px !important;
     border-radius: 50% !important;
     overflow: hidden !important;
-    left: 18px !important;
+    left: 28px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     margin: 0 !important;
     z-index: 3000 !important;
     pointer-events: auto !important;
+
+    background: transparent !important;
+    transition: all 0.25s ease !important;
 }
 
 body.fn-nuked.fn-accent .fn-profile-btn yt-interaction,
 body.fn-nuked.fn-accent .fn-profile-btn .yt-spec-button-shape-next--overlay {
     background-color: transparent !important;
     display: none !important;
-}
-
-body.fn-nuked.fn-accent .fn-profile-btn:hover {
-    background-color: rgba(77, 208, 225, 0.15) !important;
-    cursor: pointer;
 }
 
 .fn-injected-nav {
