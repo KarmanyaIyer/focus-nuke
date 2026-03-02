@@ -1,6 +1,6 @@
 # Focus Nuke
 
-*Currently unpublished to chrome web store. Focus right now is to find bugs, make it easier to use, and improve performance.*
+Transform YouTube into an intentional, distraction-free environment.
 
 ## **Purpose:** Remove distractions from YouTube.
 
