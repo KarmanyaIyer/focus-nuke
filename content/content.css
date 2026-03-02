@@ -1,3 +1,4 @@
+/* Base Hiding */
 body.fn-nuked ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
 body.fn-nuked ytd-watch-next-secondary-results-renderer,
 body.fn-nuked #comments,
@@ -18,6 +19,7 @@ body.fn-nuked ytd-live-chat-frame {
     display: none !important;
 }
 
+/* Header Topbar */
 body.fn-nuked #masthead #start {
     display: flex !important;
     visibility: hidden !important;
@@ -76,6 +78,7 @@ body.fn-nuked ytd-masthead #center {
     margin: 0 auto !important;
 }
 
+/* Injected Logo */
 .fn-logo-inject {
     display: inline-flex !important;
     justify-content: center !important;
@@ -113,6 +116,7 @@ body.fn-nuked.fn-accent .fn-profile-btn:hover {
     background-color: rgba(77, 208, 225, 0.15) !important;
 }
 
+/* Floating Logo */
 .fn-floating-logo {
     display: none;
 }
@@ -155,6 +159,7 @@ body.fn-nuked.fn-watch-page .fn-floating-logo:hover {
     border-radius: 50%;
 }
 
+/* OLED Theme */
 body.fn-nuked.fn-oled,
 body.fn-nuked.fn-oled ytd-app,
 body.fn-nuked.fn-oled ytd-masthead,
@@ -175,12 +180,14 @@ body.fn-oled #cinematics-container {
     display: none !important;
 }
 
+/* Accent Theme */
 body.fn-nuked.fn-accent {
     --yt-spec-call-to-action: #ffffff !important;
     --yt-spec-text-secondary: #ffffff !important;
     --yt-spec-brand-link-text: #4dd0e1 !important;
 }
 
+/* Topbar Buttons */
 body.fn-nuked #masthead #end {
     display: flex !important;
     align-items: center !important;
@@ -219,6 +226,7 @@ body.fn-nuked.fn-accent .fn-profile-btn .yt-spec-button-shape-next--overlay {
     display: none !important;
 }
 
+/* Custom Navbar */
 .fn-injected-nav {
     display: flex;
     justify-content: center;
@@ -258,6 +266,7 @@ body.fn-nuked.fn-accent .fn-injected-nav a:hover {
     color: #4dd0e1;
 }
 
+/* Focus Notes */
 .fn-notes-btn {
     position: fixed;
     bottom: 24px;
@@ -440,6 +449,7 @@ body.fn-nuked.fn-accent .fn-notes-textarea:focus {
 }
 
 
+/* Hide Metadata */
 body.fn-nuked.fn-super-nuke #below,
 body.fn-nuked.fn-super-nuke ytd-watch-metadata,
 body.fn-nuked.fn-super-nuke #ticket-shelf,
@@ -447,18 +457,17 @@ body.fn-nuked.fn-super-nuke #primary-inner>#info {
     display: none !important;
 }
 
-/* Disable main page scrolling to hide the redundant global scrollbar */
+/* Super Nuke */
+
 body.fn-nuked.fn-super-nuke.fn-watch-page,
 html:has(body.fn-nuked.fn-super-nuke.fn-watch-page) {
     overflow: hidden !important;
 }
 
-/* Wipe out the margin variable that causes padding issues */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy[flexy]:not([fullscreen]) {
     --ytd-margin-6x: 0px !important;
 }
 
-/* Pin the column wrapper to the very edges */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #columns {
     max-width: 100vw !important;
     width: 100vw !important;
@@ -468,7 +477,6 @@ body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #columns {
     justify-content: space-between !important;
 }
 
-/* Force primary to take EXACTLY the remaining width (100vw - 260px) */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #primary,
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #primary-inner {
     width: calc(100vw - 260px) !important;
@@ -479,7 +487,6 @@ body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #primary-inner {
     flex: none !important;
 }
 
-/* Force all inner layers to blow up to 100% of primary, with a 16:9 height */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #player,
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #player-container-outer,
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) #player-container-inner,
@@ -494,7 +501,6 @@ body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) .html5-video-conta
     aspect-ratio: 16 / 9 !important;
 }
 
-/* Make sure the video itself fills the 100% box, scaling naturally */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) video.html5-main-video {
     width: 100% !important;
     height: 100% !important;
@@ -503,7 +509,6 @@ body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) video.html5-main-v
     object-fit: contain !important;
 }
 
-/* Ensure controls stretch properly */
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) .ytp-chrome-bottom,
 body.fn-nuked.fn-super-nuke ytd-watch-flexy:not([fullscreen]) .ytp-chrome-top {
     width: calc(100% - 24px) !important;
