@@ -4,9 +4,7 @@
   "version": "1.0.0",
   "description": "Eliminate distractions from YouTube, transforming it into an intentional, minimalist application.",
   "permissions": [
-    "storage",
-    "activeTab",
-    "scripting"
+    "storage"
   ],
   "host_permissions": [
     "*://*.youtube.com/*"
